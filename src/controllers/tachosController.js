@@ -122,9 +122,30 @@ async function receiveMediciones(req, res) {
     }
 }
 
+async function getHistorial(req, res) {
+    try {
+        const { id } = req.params;
+        const { data, error } = await supabase
+            .from('historial_mediciones')
+            .select('*')
+            .eq('tacho_id', id)
+            .order('creado_en', { ascending: false });
+
+        if (error) {
+            return res.status(500).json({ error: error.message });
+        }
+
+        res.json(data || []);
+    } catch (err) {
+        console.error('Error fetching historial:', err);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+}
+
 module.exports = {
     getAllTachos,
     getFullTachos,
     getStats,
-    receiveMediciones
+    receiveMediciones,
+    getHistorial
 };
