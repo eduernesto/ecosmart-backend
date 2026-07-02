@@ -3,7 +3,7 @@ import logger from '../config/logger.js'
 import createError from 'http-errors'
 
 const MAX_DIST = 120
-const UMBRAL = 24
+const UMBRAL = 20
 
 function calculatePercentage(distancia) {
   return Math.round(Math.max(0, Math.min(100, ((MAX_DIST - distancia) / MAX_DIST) * 100)))
