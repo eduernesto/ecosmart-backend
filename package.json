@@ -1,23 +1,34 @@
 {
-  "name": "backend",
-  "version": "1.0.0",
+  "name": "ecosmart-backend",
+  "version": "2.0.0",
+  "type": "module",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "@supabase/supabase-js": "^2.108.1",
+    "compression": "^1.7.4",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "ws": "^8.21.0"
+    "express-rate-limit": "^7.1.4",
+    "helmet": "^7.1.0",
+    "http-errors": "^2.0.0",
+    "pino": "^9.0.0",
+    "ws": "^8.21.0",
+    "zod": "^3.22.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "eslint": "^8.56.0",
+    "nodemon": "^3.1.14",
+    "pino-pretty": "^11.0.0",
+    "prettier": "^3.2.0",
+    "vitest": "^1.2.0"
   }
 }

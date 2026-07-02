@@ -1,18 +1,21 @@
-const express = require('express');
-const router = express.Router();
-const {
-    getAllTachos,
-    getFullTachos,
-    getStats,
-    receiveMediciones,
-    getHistorial
-} = require('../controllers/tachosController');
-const hmacAuth = require('../middleware/hmacAuth');
+import { Router } from 'express'
+import {
+  getAllTachos,
+  getFullTachos,
+  getStats,
+  receiveMediciones,
+  getHistorial
+} from '../controllers/tachosController.js'
+import hmacAuth from '../middleware/hmacAuth.js'
+import validate from '../middleware/validate.js'
+import { medicionSchema } from '../validators/mediciones.js'
 
-router.get('/tachos', getAllTachos);
-router.get('/tachos/llenos', getFullTachos);
-router.get('/tachos/stats', getStats);
-router.post('/mediciones', hmacAuth, receiveMediciones);
-router.get('/tachos/:id/historial', getHistorial);
+const router = Router()
 
-module.exports = router;
+router.get('/tachos', getAllTachos)
+router.get('/tachos/llenos', getFullTachos)
+router.get('/tachos/stats', getStats)
+router.post('/mediciones', hmacAuth, validate(medicionSchema), receiveMediciones)
+router.get('/tachos/:id/historial', getHistorial)
+
+export default router

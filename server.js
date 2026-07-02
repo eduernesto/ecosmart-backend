@@ -1,20 +1,9 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const tachosRoutes = require('./src/routes/tachosRoutes');
+import 'dotenv/config'
+import app from './src/app.js'
+import logger from './src/config/logger.js'
 
-const app = express();
-const port = process.env.PORT || 3000;
-
-app.use(cors());
-app.use(express.json());
-
-app.use('/api', tachosRoutes);
-
-app.get('/', (req, res) => {
-    res.send('¡API de EcoSmart Bins funcionando al 100%!');
-});
+const port = process.env.PORT || 3000
 
 app.listen(port, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
-});
+  logger.info(`Servidor corriendo en http://localhost:${port}`)
+})

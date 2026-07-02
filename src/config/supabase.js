@@ -1,14 +1,16 @@
-const { createClient } = require('@supabase/supabase-js');
-const WebSocket = require('ws');
+import { createClient } from '@supabase/supabase-js'
+import WebSocket from 'ws'
+import logger from './logger.js'
 
-const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_KEY,
-    {
-        realtime: {
-            transport: WebSocket
-        }
-    }
-);
+const supabaseUrl = process.env.SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_KEY
 
-module.exports = supabase;
+if (!supabaseUrl || !supabaseKey) {
+  logger.error('Faltan SUPABASE_URL o SUPABASE_KEY en las variables de entorno')
+}
+
+const supabase = createClient(supabaseUrl, supabaseKey, {
+  realtime: { transport: WebSocket }
+})
+
+export default supabase
