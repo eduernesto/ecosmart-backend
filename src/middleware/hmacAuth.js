@@ -16,7 +16,7 @@ export default function hmacAuth(req, res, next) {
   }
 
   const ts = parseInt(timestamp, 10)
-  if (isNaN(ts) || Math.abs(Math.floor(Date.now() / 1000) - ts) > 30) {
+  if (isNaN(ts) || Math.abs(Math.floor(Date.now() / 1000) - ts) > 120) {
     return res.status(401).json({ ok: false, error: 'Timestamp inválido o expirado' })
   }
 
